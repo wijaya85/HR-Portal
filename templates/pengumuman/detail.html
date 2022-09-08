@@ -1,0 +1,53 @@
+{% extends "base/index.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+    <ol class="breadcrumb" style="background-color: white;">
+      <li class="breadcrumb-item"><a href="#">Administrasi</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'pengumuman:daftar_pengumuman' %}">Pengumuman</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Detail Pengumuman</li>
+    </ol>
+</nav>
+{% endblock breadcrum %}
+
+{% block content%}
+
+    <section class="content">
+        <div class="container-fluid">         
+          <!-- /.row -->
+          <div class="row">
+                <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-text-width"></i>  Detail Katagori Pengumuman</h3>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">Judul</dt>
+                            <dd class="col-sm-8">{{ object.judul }}</dd>
+                            <dt class="col-sm-4">Tanggal Mulai Pengumuman</dt>
+                            <dd class="col-sm-8">{{ object.tanggalAwal }}</dd>
+                            <dt class="col-sm-4">Tanggal Pengumuman Berakhir</dt>
+                            <dd class="col-sm-8">{{ object.tanggalAkhir }}</dd>
+                            <dt class="col-sm-4">Status</dt>
+                            <dd class="col-sm-8">
+                                {% if d.publish == 1 %}
+                                    <span class="badge badge-success rounded-pill d-inline">Publis</span>
+                                {% else %}
+                                    <span class="badge badge-danger rounded-pill d-inline">Draft</span>
+                                {% endif %}
+                            </dd>
+                            <dt class="col-sm-4">Deskripsi</dt>
+                            <dd class="col-sm-8">{{ object.deskripsi }}</dd>
+                            <dt class="col-sm-4">File</dt>
+                            <dd class="col-sm-8"><a href="http://127.0.0.1:8000/{{ object.file }}" taget="_blank">{{ object.file|cut:'media/files/pengumuman/' }}</a></dd>
+                        </dl>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+</div>
+{% endblock %}

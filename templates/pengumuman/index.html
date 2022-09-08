@@ -1,0 +1,43 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+{% block content %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+  <ol class="breadcrumb" style="background-color: white;">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Pengumuman</a></li>
+  </ol>
+</nav>
+
+<div class="container" style="margin-bottom: 100px;">
+    <div class="row">
+        <div class="col-12">
+            <h3 style="margin-top: 50px;">Pengumuman</h3>
+        </div>
+        <div class="col-3">
+            <h5 style="color: #2a5f85">Saat Ini</h5>
+            {% for a in aktif %}
+                <a href="#" style="color: black;text-decoration: underline;">{{ a.judul }}</a><br><br>
+            {% endfor %}
+
+            <h5 style="color: #2a5f85;margin-top: 50px;">Telah Berakhir</h5>
+            {% for n in non_aktif %}
+                <a href="#" style="color: black;text-decoration: underline;">{{ n.judul }}</a><br><br>
+            {% endfor %}
+        </div>
+        <div class="col-9">
+            {% for top1 in top_1 %}
+                <h4>{{ top1.judul }}</h4>
+                <iframe src="http://127.0.0.1:8000/{{ top1.file }}" type="application/pdf"
+                        frameBorder="0"
+                        scrolling="auto"
+                        height="100%"
+                        width="100%">
+                </iframe>
+
+                <p>{{ top1.deskripsi }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
