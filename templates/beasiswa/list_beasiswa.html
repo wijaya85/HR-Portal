@@ -1,0 +1,100 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+{% block content %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+  <ol class="breadcrumb" style="background-color: white;">
+    <li class="breadcrumb-item"><a href="#">Administrasi</a></li>
+    <li class="breadcrumb-item"><a href="#">Beasiswa</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Daftar Beasiswa</li>
+  </ol>
+</nav>
+<h3 align="center">Daftar Beasiswa</h3>
+
+
+<nav class="navbar">
+    <a class="navbar-brand">  Tambah</a>
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Cari Beasiswa" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+    </form>
+</nav>
+
+<table id="table_pengumuman" class="table table-striped table-borderless dataTable align-middle mb-0 bg-white">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th class="sorting">Tanggal Awal</th>
+            <th class="sorting">Tanggal Akhir</th>
+            <th class="sorting">Status</th>
+            <th class="sorting">Judul</th>
+            <th>File</th>
+            <th class="sorting">Creator</th>
+            <th>Option</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1.</td>
+            <td>01-07-2022</td>
+            <td>11-07-2022</td>
+            <td><span class="badge badge-danger rounded-pill d-inline">Arsip</span></td>
+            <td>Seleksi JPT Madya dan Pratama PERPUSNAS</td>
+            <td><a href="">Seleksi Terbuka Perpusnas.pdf</a></td>
+            <td>Wijayanto Adiwibowo</td>
+            <td><span class="mdi mdi-name">Edit</span> Hapus</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>01-07-2022</td>
+            <td>31-07-2022</td>
+            <td><span class="badge badge-success rounded-pill d-inline">Aktif</span></td>
+            <td>Hasil Seleksi Administrasi IJV</td>
+            <td><a href="">PENG-03 (Hasil Sel. Admin IJV 2022)_ttd.pdf</a></td>
+            <td>Wijayanto Adiwibowo</td>
+            <td><span class="mdi mdi-name">Edit</span> Hapus</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>01-07-2022</td>
+            <td>31-07-2022</td>
+            <td><span class="badge badge-success rounded-pill d-inline">Aktif</span></td>
+            <td>Hasil Seleksi Administrasi IJV</td>
+            <td><a href="">PENG-03 (Hasil Sel. Admin IJV 2022)_ttd.pdf</a></td>
+            <td>Wijayanto Adiwibowo</td>
+            <td><span class="mdi mdi-name">Edit</span> Hapus</td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>01-07-2022</td>
+            <td>31-07-2022</td>
+            <td><span class="badge badge-success rounded-pill d-inline">Aktif</span></td>
+            <td>Hasil Seleksi Administrasi IJV</td>
+            <td><a href="">PENG-03 (Hasil Sel. Admin IJV 2022)_ttd.pdf</a></td>
+            <td>Wijayanto Adiwibowo</td>
+            <td><span class="mdi mdi-name">Edit</span> Hapus</td>
+        </tr>
+        <tr>
+            <td>5.</td>
+            <td>01-07-2022</td>
+            <td>31-07-2022</td>
+            <td><span class="badge badge-success rounded-pill d-inline">Aktif</span></td>
+            <td>Hasil Seleksi Administrasi IJV</td>
+            <td><a href="">PENG-03 (Hasil Sel. Admin IJV 2022)_ttd.pdf</a></td>
+            <td>Wijayanto Adiwibowo</td>
+            <td><span class="mdi mdi-name">Edit</span> Hapus</td>
+        </tr>
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
+{% endblock %}
