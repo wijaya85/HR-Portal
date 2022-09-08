@@ -17,3 +17,4 @@ def StatistikGender(request):
     ).order_by('esl1')
     context = ({'query': query})
     return render(request, template, context)
+
