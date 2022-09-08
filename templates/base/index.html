@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Biro Sumber Daya Manusia</title>
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/icons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/app.min.css' %}">
+
+    <link href="{% static 'assets/libs/bootstrap-datepicker/bootstrap-datepicker.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/libs/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/libs/datatables/responsive.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/libs/datatables/buttons.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+
+    {% block style %}{% endblock %}
+</head>
+<body data-layout="horizontal">
+    <div id="wrapper">
+        <header id="topnav">
+            {% comment %} Alamat dan Telepon {% endcomment %}
+            <div class="navbar-custom" style="height: 30px;background: #02055A;">
+                <div class="container-fluid">
+                    <div class="float-left" style="color: #FFFFFF; font-size: 10px;">
+                        <i class="mdi mdi-home-circle mb-0" style="font-size: 20px;color: #FDC12A"></i>
+                        <span style="margin-left: 10px;position: relative;top: -5px;">Jl. Dr. Wahidin Raya No 1 Jakarta Pusat 10710</span>
+                    </div>
+                    <div class="float-right" style="color: #FFFFFF; font-size: 10px;">
+                        <i class="mdi mdi-phone mb-0" style="font-size: 20px;color: #26ABFF"></i>
+                        <span style="margin-left: 5px;position: relative;top: -5px;">123</span>
+                    </div>
+                </div>
+            </div>
+            {% comment %} real header navbar {% endcomment %}
+            {% include 'base/navbar.html' %}
+            
+        </header>
+        <div class="container">
+            <div class="content-page" style="margin-top: 130px;">
+                <div class="content" style="padding: 0 0 80px 0;">
+                    {% block breadcrum %}{% endblock breadcrum %}
+                    {% include 'base/menu.html' %}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <footer class="footer" style="background: #02198B;height: 120px;margin-top: 0px;">
+            <div class="text-center" style="background: #02055A;position: absolute;top: -40px;left: 0;right: 0;height: 50px;">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-4">
+                                <a href="" style="color: #FFFFFF;">FAQ</a>
+                            </div>
+                            <div class="col-4" style="border-right: 1px solid #FFFFFF;border-left: 1px solid #FFFFFF">
+                                <a href="" style="color: #FFFFFF;">Hubungi Kami</a>
+                            </div>
+                            <div class="col-4">
+                                <a href="" style="color: #FFFFFF;">HRIS</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="float-left">
+                            <img src="{% static 'images/logo_kemenkeu.png' %}" alt="" height="85" style="margin-right: 15px;">
+                            <div class="float-right" style="text-align: left;">
+                                <p style="color: #FFFFFF; font-weight: bold; font-size: 10px;margin: 0;">KEMENTERIAN KEUANGAN</p>
+                                <p style="color: #FFFFFF; font-weight: 600; font-size: 7px;margin: 0;">SEKRETARIAT JENDERAL</p>
+                                <p style="color: #FFFFFF; font-weight: 600; font-size: 7px;margin: 0;">BIRO SUMBER DAYA MANUSIA</p>
+                                <p style="color: #FFFFFF; font-weight: 400; font-size: 6px;margin: 0;">Hak Cipta Kementerian Keuangan Republik Indonesia</p>
+                                <p style="color: #FFFFFF; font-weight: 400; font-size: 6px;margin: 0;">Biro Sumber Daya Manusia - Gedung Juanda 1 Lantai 10, 18-19</p>
+                                <p style="color: #FFFFFF; font-weight: 400; font-size: 6px;margin: 0;">Jl. Dr. Wahidin Raya No 1 Jakarta Pusat 10710</p>
+                                <p style="color: #FFFFFF; font-weight: 400; font-size: 6px;margin: 0;">Telepon 021-3449230</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="float-right">
+                            <p style="color: #FFFFFF">Ikuti Kami</p>
+                            <a href="" style="color: #FFFFFF;font-size: 35px;"><i class="mdi mdi-youtube"></i></a>
+                            <a href="" style="color: #FFFFFF;font-size: 35px;"><i class="mdi mdi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+        </div>
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    
+    <!---<script type="text/javascript" src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>---->
+    <script type="text/javascript" src="{% static 'assets/js/jquery.slim.min.js' %}"></script>
+    <!----<script type="text/javascript" src="{% static 'assets/js/jquery-1.11.3.min.js' %}"></script>---->
+    <script type="text/javascript" src="{% static 'assets/js/popper.min.js' %}"></script>
+    <!-- DataTable -->
+    <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+    <script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+    <script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+{% block javascript %}{% endblock %}
+</body>
+</html>
