@@ -1,0 +1,102 @@
+{% extends "base/index.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block style %}
+<link href="{% static 'assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+    <ol class="breadcrumb" style="background-color: white;">
+      <li class="breadcrumb-item"><a href="#">Reporting</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Statistik Pegawai Kementerian Keuangan</li>
+    </ol>
+</nav>
+{% endblock breadcrum %}
+
+{% block content%}
+    <h3 align="center">Peta Sebaran Pegawai Kementerian Keuangan per Provinsi</h3>
+    <h5 align="center">per 1 September 2022</h5>
+<br>
+
+<div class="container-fluid">
+    <h5 class="text-center">Peta Sebaran Pegawai Kementerian Keuangan</h5>
+    <div id="map-indonesia" style="height: 650px" align="center"></div>
+    <span class="float-right" style="font-size: 10px;">*Data per 1 Januar 2022</span>
+</div>
+
+<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+    <table id="example1" 
+        class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th class="sorting">Provinsi</th>
+                <th class="sorting">Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for q in query %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ q.provinsikantor }}</td>
+                <td>{{ q.jumlah }}</td>
+            </tr>
+                {% endfor %}    
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Jumlah</th>
+                <th>{{ allPria }}</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite"></div>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br>
+{{ json_data|safe }}
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery.vmap.indonesia.js' %}" charset="utf-8"></script>
+
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery('#map-indonesia').vectorMap({
+            map: 'indonesia_id',
+            showTooltip: true,
+            backgroundColor: 'transparent',
+            regions : [{
+                data: {
+                    "Aceh":100
+                },
+                values: [1, 2, 3],
+                scale: ['#C8EEFF', '#0071A4'],
+                normalizeFunction: 'polynomial',
+            }],
+            regionStyle:{
+                initial:{
+                    fill:"#ddd"
+                },
+                hover : {
+                    fill: '#2a5f85',
+                    "fill-opacity": 0.7,
+                },
+            },
+            onRegionLabelShow: function(e, el, code){
+                el[0].innerHTML = '<br>' + el[0].innerHTML + '<br>' + '<p class="text-center">' + {{ data }} + '</p>'
+            },
+        });
+    });
+</script>
+{% endblock %}

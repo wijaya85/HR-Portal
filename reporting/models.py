@@ -24,6 +24,7 @@ class TempDataLengkap092022(models.Model):
     generasi = models.CharField(db_column='Generasi', max_length=11, blank=True, null=True)
     provinsikantor = models.CharField(db_column='ProvinsiKantor', max_length=50, blank=True, null=True)
     kotakantor = models.CharField(db_column='KotaKantor', max_length=50, blank=True, null=True)
+    unitsingkat = models.TextField(db_column='UnitSingkat', blank=True, null=True)
 
     class Meta:
         managed = False

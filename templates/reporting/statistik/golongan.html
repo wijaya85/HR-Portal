@@ -1,0 +1,128 @@
+{% extends "base/index.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+    <ol class="breadcrumb" style="background-color: white;">
+      <li class="breadcrumb-item"><a href="#">Reporting</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Statistik Pegawai Kementerian Keuangan</li>
+    </ol>
+</nav>
+{% endblock breadcrum %}
+
+{% block content%}
+    <h3 align="center">Statistik Pegawai Kementerian Keuangan Berdasarkan Unit dan Golongan</h3>
+    <h5 align="center">per 1 September 2022</h5>
+<br>
+
+<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+    <table id="example1" 
+        class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th class="sorting">Unit</th>
+                <th>I/a</th>
+                <th>I/b</th>
+                <th>I/c</th>
+                <th>I/d</th>
+                <th>II/a</th>
+                <th>II/b</th>
+                <th>II/c</th>
+                <th>II/d</th>
+                <th>III/a</th>
+                <th>III/b</th>
+                <th>III/c</th>
+                <th>III/d</th>
+                <th>IV/a</th>
+                <th>IV/b</th>
+                <th>IV/c</th>
+                <th>IV/d</th>
+                <th>IV/e</th>
+                <th>Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for q in query %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{% if q.esl1 %} {{ q.esl1 }} {% else %} Menteri Keuangan {% endif %}</td>
+                <td>{{ q.i_a }}</td>
+                <td>{{ q.i_b }}</td>
+                <td>{{ q.i_c }}</td>
+                <td>{{ q.i_d }}</td>
+                <td>{{ q.ii_a }}</td>
+                <td>{{ q.ii_b }}</td>
+                <td>{{ q.ii_c }}</td>
+                <td>{{ q.ii_d }}</td>
+                <td>{{ q.iii_a }}</td>
+                <td>{{ q.iii_b }}</td>
+                <td>{{ q.iii_c }}</td>
+                <td>{{ q.iii_d }}</td>
+                <td>{{ q.iv_a }}</td>
+                <td>{{ q.iv_b }}</td>
+                <td>{{ q.iv_c }}</td>
+                <td>{{ q.iv_d }}</td>
+                <td>{{ q.iv_e }}</td>
+                <td>{{ q.jumlah }}</td>
+            </tr>
+                {% endfor %}    
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Jumlah</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite"></div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["csv", "excel", "print",],
+        "paging": false,
+        "searching": false,
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": false,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
+{% endblock %}
