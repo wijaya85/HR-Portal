@@ -1,3 +1,4 @@
+from re import template
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from .forms import PengumumanForm
@@ -49,3 +50,12 @@ def detail(request, id):
         return render(request, template_name, context)
     else:
         return redirect(reverse('pengumuman:daftar_pengumuman'))
+    
+def delete(request,id):
+    template_name = 'pengumuman/delete_view.html'
+    obj = Pengumuman.objects.get(id=id)
+    if id:
+        
+        obj.delete()
+        
+    return redirect(reverse('pengumuman:daftar_pengumuman'))
