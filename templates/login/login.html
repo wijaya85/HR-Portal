@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% extends "base/auth.html" %}
+{% load static %}
+{% block style %}
+{% endblock %}
+{% block content %}
+<div class="bg-image">
+    <div class="container-fluid body-content">
+        <div class="welcome-page">
+            <div class="row">
+                <div class="col-lg-8 hidden-xs hidden-sm hidden-md index-panel" align="center" style="background-color: unset;"></div>
+                <div class="col-lg-4">
+                    <div class="row" style="margin-top: 75px;">
+                        <div class="col-lg-12 fadeIn">
+                            <div class="container-login100">
+                                <div class="wrap-login100">
+                                    <form class="login100-form validate-form" method="post">
+                                        {% csrf_token %} 
+                                        <img class="imgicon" src="{% static 'auth/assets/imgs/kemenkeuid.png' %}">
+                                        <fieldset>
+                                            <div class="container-dataprofil">
+                                                <div class="gambar">
+                                                    <p style="font-size:12px">KemenkeuID adalah akun tunggal digital <br />(<i>Single Identity Login</i>) Anda di Kementerian Keuangan.</p>
+                                                    <p style="font-size:10px"> Gunakan secara bijak dan <b>JANGAN</b> bagi pakai akun Anda kepada orang lain.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required data-val="true" data-val-required="The Username field is required." name="Username" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" id="password" placeholder="Enter Password" required data-val="true" data-val-required="The Password field is required." name="Password">
+                                            </div>
+                                            <div class="flex-sb-m w-full p-t-3 p-b-32">
+                                                <div class="form-group">
+                                                    <center>
+                                                        <a href="https://sso.kemenkeu.go.id/NewAccount/ForgotPassword?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dekemenkeu-web%26redirect_uri%3Dhttps%253A%252F%252Foa.kemenkeu.go.id%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520kehadiran.ekemenkeu%2520profil.hris%2520frontend.nadine%2520jabatan.hris%2520rapat.ekemenkeu%2520agenda.ekemenkeu%2520diklat.hris%2520pendidikan.hris%2520keluarga.hris%2520pangkat.hris%2520organisasi.hris%2520kolaborasi.ekemenkeu%2520pegawai.ekemenkeu%2520ekemenkeu%26nonce%3D5170598e30c92aa5a76de4297c47bd55d5jEAQ9jI%26state%3D87f9e49dcb1027cfeb7fe2a82dcb96c4bfPdhWY0g%26code_challenge%3DFz4hrZgbZyHxJXQYbmyQ2iLak2uPzOk_lfOBmIj6QwQ%26code_challenge_method%3DS256" class="txt3">
+                                                            Lupa Password?
+                                                        </a>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="container-login100-form-btn slideBottom">
+                                                <div class="wrap-login100-form-btn">
+                                                    <div class="login100-form-bgbtn"></div>
+                                                    <button class="login100-form-btn" name="button" value="login">
+                                                        LOGIN
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="text-center p-t-115">
+                                            <span class="form-text text-muted">
+                                                Belum memiliki KemenkeuID?
+                                            </span>
+                                            <br />
+                                            <a href="https://sso.kemenkeu.go.id/NewAccount/ExternalRegistration?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dekemenkeu-web%26redirect_uri%3Dhttps%253A%252F%252Foa.kemenkeu.go.id%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520kehadiran.ekemenkeu%2520profil.hris%2520frontend.nadine%2520jabatan.hris%2520rapat.ekemenkeu%2520agenda.ekemenkeu%2520diklat.hris%2520pendidikan.hris%2520keluarga.hris%2520pangkat.hris%2520organisasi.hris%2520kolaborasi.ekemenkeu%2520pegawai.ekemenkeu%2520ekemenkeu%26nonce%3D5170598e30c92aa5a76de4297c47bd55d5jEAQ9jI%26state%3D87f9e49dcb1027cfeb7fe2a82dcb96c4bfPdhWY0g%26code_challenge%3DFz4hrZgbZyHxJXQYbmyQ2iLak2uPzOk_lfOBmIj6QwQ%26code_challenge_method%3DS256" class="txt3">
+                                                Daftar Sekarang!
+                                            </a>
+                                        </div>
+                                        <div class="text-center p-t-115">
+                                            <span class="form-text text-muted">
+                                                Aktivasi Akun Gagal?
+                                            </span>
+                                            <br />
+                                            <a href="https://sso.kemenkeu.go.id/NewAccount/ResendActivationLink?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dekemenkeu-web%26redirect_uri%3Dhttps%253A%252F%252Foa.kemenkeu.go.id%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520kehadiran.ekemenkeu%2520profil.hris%2520frontend.nadine%2520jabatan.hris%2520rapat.ekemenkeu%2520agenda.ekemenkeu%2520diklat.hris%2520pendidikan.hris%2520keluarga.hris%2520pangkat.hris%2520organisasi.hris%2520kolaborasi.ekemenkeu%2520pegawai.ekemenkeu%2520ekemenkeu%26nonce%3D5170598e30c92aa5a76de4297c47bd55d5jEAQ9jI%26state%3D87f9e49dcb1027cfeb7fe2a82dcb96c4bfPdhWY0g%26code_challenge%3DFz4hrZgbZyHxJXQYbmyQ2iLak2uPzOk_lfOBmIj6QwQ%26code_challenge_method%3DS256" class="txt3">
+                                                Kirim Ulang Link Aktivasi!
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}
