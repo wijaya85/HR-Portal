@@ -23,6 +23,7 @@ urlpatterns = [
     path('pengumuman/', include('pengumuman.urls')),
     path('reporting/', include('reporting.urls')),
     path('admin/', admin.site.urls),
+    path('login', include('website.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_DIR)
