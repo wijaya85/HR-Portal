@@ -22,6 +22,7 @@ urlpatterns = [
     path('website/', include('website.urls')),
     path('pengumuman/', include('pengumuman.urls')),
     path('reporting/', include('reporting.urls')),
+    path('galeri/', include('galeri_sdm.urls')),
     path('admin/', admin.site.urls),
     path('login', include('website.urls')),
 ]

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pengumuman',
     'reporting',
+    'galeri_sdm',
     'crispy_forms',
     'widget_tweaks',
 ]
