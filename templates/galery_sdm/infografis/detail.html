@@ -1,0 +1,36 @@
+{% extends "base/index.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+    <ol class="breadcrumb" style="background-color: white;">
+      <li class="breadcrumb-item"><a href="#">Administrasi</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'galeri_sdm:daftar_banner' %}">Banner</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Detail Banner</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block navbar %}
+    {% include 'base/navbar.html' %}
+{% endblock navbar %}
+
+{% block content %}  
+<section class="content">
+    <h3 align="center">Detail Banner</h3>
+    <!-- /.row -->
+    <div class="row">
+          <div class="col-12">
+          <div class="card">
+              <div class="card-body">
+                  <h5>{{ object.judul }}</h5>
+                  <img src="http://127.0.0.1:8000/{{ object.lampiran }}" width="1000" align="center">
+                  <br>
+                  <p>{{ object.keterangan }}</p>
+              </div>
+          </div>
+      </div>
+    </div>
+</section>
+{% endblock %}

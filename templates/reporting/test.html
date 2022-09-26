@@ -19,8 +19,8 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title" align="center">Jumlah per Unit Eselon I</h5>
-          <canvas id="perUnit"></canvas>
+          <h5 class="card-title" align="center">Jumlah per Golongan</h5>
+          <canvas id="perGol"></canvas>
         </div>
       </div>
     </div>
@@ -33,6 +33,14 @@
       </div>
     </div>
     <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title" align="center">Jumlah per Jenjang Pendidikan</h5>
+          <canvas id="perPendidikan"></canvas>
+        </div>
+      </div>
+    </div>
+    <!----<div class="col-md-6">
       <div class="card text-white">
         <div class="card-header bg-primary">
           <h3 class="card-title" style="color:white" align="center">Area Chart</h3>
@@ -160,56 +168,61 @@
         </div>
         
         </div>
-</div>
+</div>---->
 
+{% for d in data %}{{d.jumlah}}, {% endfor %}
 <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
 <script>
-    // Bar Chart 
-    const barLabels = [
-      'BKF',
-      'BPPK',
-      'DJA',
-      'DJBC',
-      'DJKN',
-      'DJP',
-      'DJPb',
-      'DJPPR',
-      'Itjen',
-      'Setjen',
-    ];
-  
-    var barData = {
-      labels: barLabels,
+    var barGolonganData = {
+      labels: {{ golLabels|safe }},
       datasets: [{
-        label: 'Jumlah Pegawai per Unit Eselon I',
+        label: 'Jumlah Pegawai per Golongan',
         backgroundColor: 'rgb(75, 192, 192)',
         borderColor: 'rgb(255, 99, 132)',
-        data: [8, 10, 8, 35, 9, 45, 20, 10, 6, 8],
+        data: {{ golValues|safe }},
       }]
     };
 
     var barConfig = {
         type: 'bar',
-        data: barData,
+        data: barGolonganData,
         options: {}
     };
 
-    var perUnit = new Chart(
-        document.getElementById('perUnit'),
+    var perGol = new Chart(
+        document.getElementById('perGol'),
         barConfig
     ); 
 
-    // Pie Chart
-    const pieLabels = [
-      'Pria', 'Wanita',
-    ];
+    var barPendidikanData = {
+      labels: {{ pendidikanLabels|safe }},
+      datasets: [{
+        label: 'Jumlah Pegawai per Jenjang Pendidikan',
+        backgroundColor: 'rgb(75, 192, 192)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: {{ pendidikanValues|safe }},
+      }],
+      order: ['SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3']
+    };
 
+    var barPendidikanConfig = {
+        type: 'bar',
+        data: barPendidikanData,
+        options: {}
+    };
+
+    var perGol = new Chart(
+        document.getElementById('perPendidikan'),
+        barPendidikanConfig
+    ); 
+
+    // Pie Chart
     const pieData = {
-        labels: pieLabels,
+        labels: {{ labels|safe }},
         datasets: [{
           label: 'Jumlah Pegawai per Jenis Kelamin',
           backgroundColor : ['#f56954', '#00a65a',],
-          data: [70, 30],
+          data: {{ values|safe }}
         }]
     };
 

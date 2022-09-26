@@ -22,7 +22,7 @@
 
 <div class="container-fluid">
     <h5 class="text-center">Peta Sebaran Pegawai Kementerian Keuangan</h5>
-    <div id="map-indonesia" style="height: 650px" align="center"></div>
+    <div id="map-indonesia" style="height: 550px" align="center"></div>
     <span class="float-right" style="font-size: 10px;">*Data per 1 Januar 2022</span>
 </div>
 
@@ -61,7 +61,7 @@
 </div>
 
 <br><br><br><br><br><br><br><br>
-{{ json_data|safe }}
+{{data|safe}}
 
 {% endblock %}
 
@@ -69,34 +69,61 @@
 <script type="text/javascript" src="{% static 'assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'assets/js/jquery.vmap.indonesia.js' %}" charset="utf-8"></script>
 
-
 <script>
-    jQuery(document).ready(function () {
-        jQuery('#map-indonesia').vectorMap({
-            map: 'indonesia_id',
-            showTooltip: true,
-            backgroundColor: 'transparent',
-            regions : [{
-                data: {
-                    "Aceh":100
-                },
-                values: [1, 2, 3],
-                scale: ['#C8EEFF', '#0071A4'],
-                normalizeFunction: 'polynomial',
-            }],
-            regionStyle:{
-                initial:{
-                    fill:"#ddd"
-                },
-                hover : {
-                    fill: '#2a5f85',
-                    "fill-opacity": 0.7,
-                },
-            },
-            onRegionLabelShow: function(e, el, code){
-                el[0].innerHTML = '<br>' + el[0].innerHTML + '<br>' + '<p class="text-center">' + {{ data }} + '</p>'
-            },
-        });
-    });
-</script>
-{% endblock %}
+    var data = [{{data|safe}}];
+
+    window.alert(data);
+
+    jQuery(function(){
+      var $ = jQuery;
+
+      $('#map-indonesia').vectorMap({
+        map: 'indonesia_id',
+        backgroundColor: 'transparent',
+        series: {
+          regions: [{
+            scale: ['#C8EEFF', '#0071A4'],
+            normalizeFunction: 'polynomial',
+            values: //{{data|safe}}
+            {
+              "Aceh":1396, 
+			  "Bali":1659, 
+			  "Banten":3255, 
+			  "Bengkulu":510, 
+			  "Yogyakarta":908, 
+			  "DKI Jakarta":26601, 
+			  "Gorontalo":260,
+			  "Jambi":695,
+			  "Jawa Barat":6386,
+			  "Jawa Tengah":5077,
+			  "Jawa Timur":7115,
+			  "Kalimantan Barat":1519,
+			  "Kalimantan Selatan":1174,
+			  "Kalimantan Tengah":702,
+			  "Kalimantan Timur":1728,
+			  "Kalimantan Utara":344,
+			  "Kep. Bangka Belitung":467,
+			  "Kep. Riau":2287,
+			  "Lampung":1307,
+			  "Maluku":405,
+			  "Maluku Utara":326,
+			  "Nusa Tenggara Barat":886,
+			  "Nusa Tenggara Timur":890,
+			  "Papua":936,
+			  "Papua Barat":467,
+			  "Riau":1669,
+			  "Sulawesi Barat":253,
+			  "Sulawesi Selatan":1981, 
+			  "Sulawesi Tengah":770,
+			  "Sulawesi Tenggara":467,
+			  "Sulawesi Utara":880, 
+			  "Sumatera Barat":912, 
+			  "Sumatera Selatan":1637, 
+			  "Sumatera Utara":3463
+            }
+          }]
+        }
+      });
+    })
+  </script>
+  {% endblock %}

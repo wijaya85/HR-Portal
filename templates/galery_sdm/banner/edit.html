@@ -1,0 +1,38 @@
+{% extends "base/index.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+    <ol class="breadcrumb" style="background-color: white;">
+      <li class="breadcrumb-item"><a href="#">Administrasi</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'galeri_sdm:daftar_banner' %}">Banner</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Edit Banner</li>
+    </ol>
+</nav>
+{% endblock breadcrum %}
+
+{% block content %}
+<h3 align="center">Edit Banner</h3>
+<form method="POST" enctype="multipart/form-data">
+
+    <!-- Security token -->
+    {% csrf_token %}
+
+    <!-- Using the formset -->
+    <div class="card-body">
+        {% for field in form.visible_fields %}
+        <div class="form-group row">
+            <label for="field.id_for_label" class="col-sm-2 col-form-label">
+                {{ field.label }}
+            </label>
+        </div class="col-sm-10">
+            {{ field|add_class:'form-control' }}
+        {% endfor %}
+    </div>              
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+<br><br><br><br><br><br>
+{% endblock %}

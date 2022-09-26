@@ -29,3 +29,13 @@ class TempDataLengkap092022(models.Model):
     class Meta:
         managed = False
         db_table = 'Temp_Data_lengkap_092022'
+        
+ 
+        
+class Statistikpegawaiperuniteselon1(models.Model):
+    singkatanesl1 = models.TextField(db_column='singkatanEsl1')  # Field name made lowercase.
+    jumlah = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'statistikPegawaiPerUnitEselon1'

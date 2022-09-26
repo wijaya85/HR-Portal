@@ -17,12 +17,16 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from hrportal_api.views import loginCallback, tokenCallback
 
 urlpatterns = [
+    path('login-callback/', loginCallback, name='login_callback'),
+    path('token-callback/', tokenCallback, name='token_callback'),
     path('website/', include('website.urls')),
     path('pengumuman/', include('pengumuman.urls')),
     path('reporting/', include('reporting.urls')),
     path('galeri/', include('galeri_sdm.urls')),
+    path('api/', include('hrportal_api.urls')),
     path('admin/', admin.site.urls),
     path('login', include('website.urls')),
 ]

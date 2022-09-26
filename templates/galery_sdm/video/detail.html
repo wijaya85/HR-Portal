@@ -1,0 +1,55 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+<!--- Menu breadcrumb-->
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+  <ol class="breadcrumb" style="background-color: white;">
+    <li class="breadcrumb-item"><a href="#">Administrasi</a></li>
+    <li class="breadcrumb-item"><a href="#">Video</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Detail Video</li>
+  </ol>
+</nav>
+{% endblock breadcrum %}
+
+{% block navbar %}
+    {% include 'base/menu.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<br><h3 align="center">Video {{ object.judul }}</h3>
+<br>
+<div class="card xl-12">
+    <div class="card-body">
+        <div class="embed-responsive embed-responsive-1by1">
+            {% if object.linkyoutube is None %}
+                <video width="100%" height="400" controls="">
+                    <source src="http://127.0.0.1:8000/{{ object.lampiran }}" type="video/mp4">	  
+                    Mohon maaf browser Anda tidak mendukung untuk menampilkan video ini. Terima kasih.
+                </video>
+            {% else %}
+                <iframe class="embed-responsive-item" src="{{ object.linkyoutube }}" frameborder="0" allowfullscreen=""></iframe>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br><br><br>
+{% endblock %}
+    
+{% block javascript %}
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", 
+            {
+                text: '<i class="fa fa-plus"></i>',
+                className: 'btn btn-default',
+                action: function (e, dt, node, config) {
+                    window.location = '{% url "galeri_sdm:add_video" %}';
+                }
+            }]}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>
+
+{% endblock %}

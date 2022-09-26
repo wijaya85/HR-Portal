@@ -12,6 +12,10 @@
 </nav>
 {% endblock breadcrum %}
 
+{% block navbar %}
+    {% include 'base/menu.html' %}
+{% endblock navbar %}
+
 {% block content %}
 <h3 align="center">{{ judul }}</h3>
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">

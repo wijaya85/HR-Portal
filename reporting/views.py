@@ -1,40 +1,56 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import TempDataLengkap092022
+from django.http import HttpResponse, JsonResponse
+from .models import TempDataLengkap092022, Statistikpegawaiperuniteselon1
+from pegawai.models import DataLengkap
 from django.db.models import Count, Case, When, IntegerField
 import json
 
-# Create your views here.
+# Create your views here.    
+    
 def test(request):
-    labelsUnit = []
-    dataUnit = []
     labelsGender = []
     dataGender = []
-    model = TempDataLengkap092022
-    perUnit = model.objects.all().values('unitsingkat').annotate(
-        jumlah=Count('idpegawai'),
-    ).order_by('unitsingkat')
-    for a in perUnit:
-        labelsUnit.append(a['unitsingkat'])
-        dataUnit.append(a['jumlah'])
-        
+    labelsGolongan = []
+    dataGolongan = []
+    labelPendidikan = []
+    dataPendidikan = []
+    model = DataLengkap
     gender = model.objects.all().values('kodekelamin').annotate(
         jumlah=Count('idpegawai'),
     ).order_by('kodekelamin')
+    
+    golongan = model.objects.all().values('kodegolongan').annotate(
+        jumlah=Count('idpegawai')
+    ).order_by('kodegolongan')
+    
+    pendidikan = model.objects.all().values('singkatanjenjang').annotate(
+        jumlah=Count('idpegawai')
+    ).order_by('singkatanjenjang')
     
     for b in gender:
         labelsGender.append(b['kodekelamin'])
         dataGender.append(b['jumlah'])
     
-    context = ({'labelsUnit': json.dumps(labelsUnit), 
-                'dataUnit': json.dumps(dataUnit),
-                'labelsGender':json.dumps(labelsGender),
-                'dataGender': json.dumps(dataGender)})
+    for a in golongan:
+        labelsGolongan.append(a['kodegolongan'])
+        dataGolongan.append(a['jumlah'])
+        
+    for c in pendidikan:
+        labelPendidikan.append(c['singkatanjenjang'])
+        dataPendidikan.append(c['jumlah'])
+        
+    context = ({'labels': json.dumps(labelsGender), 
+                'values':json.dumps(dataGender),
+                'golLabels': json.dumps(labelsGolongan),
+                'golValues': json.dumps(dataGolongan),
+                'pendidikanLabels': json.dumps(labelPendidikan),
+                'pendidikanValues': json.dumps(dataPendidikan),})
     return render(request, 'reporting/test.html', context)
+
 
 def StatistikGender(request):
     template = 'reporting/statistik/unit.html'
-    model = TempDataLengkap092022
+    model = DataLengkap
     query = model.objects.all().values('esl1').annotate(
         pria=Count(Case(When(kodekelamin='P', then=1), output_field=IntegerField(),)),
         wanita=Count(Case(When(kodekelamin='W', then=1), output_field=IntegerField(),)),
@@ -59,7 +75,7 @@ def StatistikGender(request):
 
 def StatistikGolongan(request):
     template = 'reporting/statistik/golongan.html'
-    model = TempDataLengkap092022
+    model = DataLengkap
     query = model.objects.all().values('esl1').annotate(
         i_a=Count(Case(When(kodegolonganruang='I/a', then=1), output_field=IntegerField(),)),
         i_b=Count(Case(When(kodegolonganruang='I/b', then=1), output_field=IntegerField(),)),
@@ -85,7 +101,7 @@ def StatistikGolongan(request):
 
 def StatistikPendidikan(request):
     template = 'reporting/statistik/pendidikan.html'
-    model = TempDataLengkap092022
+    model = DataLengkap
     query = model.objects.all().values('esl1').annotate(
         sd=Count(Case(When(singkatanjenjang='SD', then=1), output_field=IntegerField(),)),
         smp=Count(Case(When(singkatanjenjang='SMP', then=1), output_field=IntegerField(),)),
@@ -103,12 +119,20 @@ def StatistikPendidikan(request):
 
 def petaSebaranPegawai(request):
     template = 'reporting/statistik/peta.html'
-    model = TempDataLengkap092022
+    model = DataLengkap
     
+    provinsi = []
+    jumlah = []
     data = []
     query = model.objects.all().values('provinsikantor').annotate(
         jumlah = Count('idpegawai')
     ).order_by('provinsikantor')
     
-    contex = ({'query': query, 'json_data': json.dumps(data)})
+    #for q in query:
+    #    data.append(q['provinsikantor'] + ":" + str(q['jumlah']))
+    
+    data = [{data['provinsikantor']:data['jumlah']} for data in query]
+    
+    print(data)
+    contex = ({'query': query, 'provinsi': json.dumps(provinsi), 'jumlah': json.dumps(jumlah), 'data': data})
     return render(request, template, contex)

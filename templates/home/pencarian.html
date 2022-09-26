@@ -1,0 +1,31 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+<!--- Menu breadcrumb-->
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+  <ol class="breadcrumb" style="background-color: white;">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Pencarian Pegawai</a></li>
+    <li class="breadcrumb-item active" aria-current="page"></li>
+  </ol>
+</nav>
+{% endblock breadcrum %}
+
+{% block content %}
+    <h3 align="center">Pencarian Pegawai</h3>
+    <br>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form action="">
+                <div class="input-group">
+                    <input type="search" class="form-control form-control-lg" placeholder="Cari Nama Pegawai" name="pencarian">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+
+         {% for q in query %}
+            - {{ q.namalengkap }}<br>
+         {% endfor %}
+{% endblock %}

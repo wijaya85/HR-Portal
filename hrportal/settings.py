@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     'pengumuman',
     'reporting',
     'galeri_sdm',
+    'agenda',
+    'pegawai',
+    'hrportal_api',
+    'rest_framework',
     'crispy_forms',
     'widget_tweaks',
 ]

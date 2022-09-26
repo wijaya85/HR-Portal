@@ -1,0 +1,115 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+<!--- Menu breadcrumb-->
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+  <ol class="breadcrumb" style="background-color: white;">
+    <li class="breadcrumb-item"><a href="#">Administrasi</a></li>
+    <li class="breadcrumb-item"><a href="#">Banner</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Daftar Banner</li>
+  </ol>
+</nav>
+{% endblock breadcrum %}
+
+{% block navbar %}
+    {% include 'base/menu.html' %}
+{% endblock navbar %}
+
+{% block content %}
+
+<h3 align="center">{{ judul }}</h3>
+    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <table id="example1" 
+            class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th class="sorting">Judul</th>
+                    <th class="sorting">Status</th>
+                    <th class="sorting">Image</th>
+                    <th class="sorting">Creator</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ d.judul }}</td>
+                <td>
+                    {% if d.publish == 1 %}
+                        <span class="badge badge-success rounded-pill d-inline">Publis</span>
+                    {% else %}
+                        <span class="badge badge-danger rounded-pill d-inline">Draft</span>
+                    {% endif %}
+                </td>
+                <td align="center"><a href="{% url 'galeri_sdm:detail_banner' d.id %}"><img src="http://127.0.0.1:8000/{{ d.thumbnail }}" width="250" height="150"></a></td>
+                <td></td>
+                <td>
+                    <div class="text-center" style="cursor: pointer;">
+                        <a href="{% url 'galeri_sdm:edit_banner' d.id %}"><i class="mdi mdi-square-edit-outline"></i><span>Ubah</span></a>&nbsp;&nbsp;
+                        <a  class="mdi mdi-square-delete-outline" href = "#" onclick='javascript:showModal( "{% url 'galeri_sdm:delete_banner' d.id %}" );' ><i class="fas fa-trash"></i>Delete</a>
+                    </div>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table></div>
+    
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Hapus agenda</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Anda yakin akan menghapus Banner ini?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <a class="btn btn-primary" href="{% url 'galeri_sdm:daftar_banner' %}" data-dismiss="modal">Batal</a>
+              <a class="btn btn-danger" href="#" id='hapus'>Hapus</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    
+    <br><br><br><br>
+
+    
+{% endblock %}
+
+{% block middle %}
+<script>
+    function showModal(e){
+        $("#modal-default").modal('show');
+        $('#hapus').attr('href',e);
+    };  
+</script>
+{% endblock  %}
+    
+
+
+{% block javascript %}
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", 
+            {
+                text: '<i class="fa fa-plus"></i>',
+                className: 'btn btn-default',
+                action: function (e, dt, node, config) {
+                    window.location = '{% url "galeri_sdm:add_banner" %}';
+                }
+            }]}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>
+
+{% endblock %}

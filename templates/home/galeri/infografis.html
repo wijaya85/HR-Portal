@@ -1,0 +1,39 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+<!--- Menu breadcrumb-->
+{% block breadcrum %}
+<nav aria-label="breadcrumb" style="margin-top: 15px; background-color: white;">
+  <ol class="breadcrumb" style="background-color: white;">
+    <li class="breadcrumb-item"><a href="#">home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Infografis</li>
+  </ol>
+</nav>
+{% endblock breadcrum %}
+{% block content %}
+<h3 align="center">Daftar Infografis</h3><br>
+<!---<div class="row">
+    {% for d in data %}
+      <div class="col-sm-6 col-md-4 mb-3">
+        <img src="http://127.0.0.1:8000/{{d.lampiran}}" alt="" class="fluid img-thumbnail" width="100px" height="200px">
+      </div>
+      {% endfor %}
+</div>---->
+<div class="row">
+      <!-- Gallery item -->
+      {% for d in data %}
+      <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+        <div class="bg-white rounded shadow-sm">
+          <a href="#" class="text-dark">
+            <img src="http://127.0.0.1:8000/{{d.lampiran}}" width="100px" height="200px"  class="img-fluid card-img-top">
+            <div class="p-4">
+              <h5>{{d.judul}}</h5>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+</div>
+      <!-- End -->
+</div><br><br><br>
+{% endblock %}

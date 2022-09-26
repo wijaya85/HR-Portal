@@ -55,7 +55,5 @@ def delete(request,id):
     template_name = 'pengumuman/delete_view.html'
     obj = Pengumuman.objects.get(id=id)
     if id:
-        
         obj.delete()
-        
     return redirect(reverse('pengumuman:daftar_pengumuman'))
